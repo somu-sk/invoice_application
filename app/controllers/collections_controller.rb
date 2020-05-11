@@ -11,6 +11,10 @@ class CollectionsController < ApplicationController
 
     invoice_id = Invoice.find_by(reference_id: collection['reference_id'])&.id
 
-    redirect_to controller: 'invoices' , action: "show", id: invoice_id
+    if invoice_id.present?
+      redirect_to controller: 'invoices' , action: "show", id: invoice_id
+    else
+      redirect_to '/'
+    end
   end
 end
