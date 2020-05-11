@@ -59,6 +59,8 @@
     </table>
     <% if (@invoice.total_amount != @invoice.collections.pluck(:collected_amount).reduce(:+).to_i) %>
        <%= link_to "Add Collection", new_collection_path, class: "btn btn-primary" %>
+    <% else %>
+        <%= link_to "Home", dashboard_path, class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
