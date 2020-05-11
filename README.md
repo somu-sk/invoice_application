@@ -14,3 +14,5 @@ Things you may want to cover:
     -> It will import all json files and persit the records into db.
 
 * Use the command rails server to start the server.
+
+* Use (yyyy-mm-dd) pattern for adding dates in form.
