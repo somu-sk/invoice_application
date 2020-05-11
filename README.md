@@ -5,20 +5,12 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* First install all the gems in gemfile.
 
-* System dependencies
+* Run the full-reset rake task by using the command,
 
-* Configuration
+    -> rails db:full_reset
 
-* Database creation
+    -> It will import all json files and persit the records into db.
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Use the command rails server to start the server.

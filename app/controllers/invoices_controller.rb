@@ -1,7 +1,9 @@
 class InvoicesController < ApplicationController
   def dashboard
-    # @show_table = params['type'].present? ? Invoice.filtered_bills(params['type']) : Invoice.dashboard_data
     @show_table = params['type'].present? ? Invoice.filtered_bills(params['type']): Invoice.includes(:collections).order(invoice_date: :desc)
+
+    # sending values as array of hashes
+    # @show_table = params['type'].present? ? Invoice.filtered_bills(params['type']) : Invoice.dashboard_data
   end
 
   def show

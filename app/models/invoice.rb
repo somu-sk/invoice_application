@@ -33,11 +33,11 @@ class Invoice < ApplicationRecord
   end
 
   def self.filtered_bills(type)
+    (type == 'pending') ? Invoice.includes(:collections).order(invoice_date: :desc).select{ |invoice| invoice.total_amount != (invoice.collections.pluck(:collected_amount).reduce(:+).to_i)} : Invoice.includes(:collections).order(invoice_date: :desc).select{ |invoice| invoice.total_amount == (invoice.collections.pluck(:collected_amount).reduce(:+).to_i)}
+
     # data_array = Invoice.dashboard_data
     # filtered_array = data_array.map {|invoice| invoice if invoice['type'] == type}
-
     # filtered_array.compact
-    (type == 'pending') ? Invoice.includes(:collections).order(invoice_date: :desc).select{ |invoice| invoice.total_amount != (invoice.collections.pluck(:collected_amount).reduce(:+).to_i)} : Invoice.includes(:collections).order(invoice_date: :desc).select{ |invoice| invoice.total_amount == (invoice.collections.pluck(:collected_amount).reduce(:+).to_i)}
   end
 
 end
