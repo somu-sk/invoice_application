@@ -1,11 +1,12 @@
 <div class="d-flex justify-content-center">
   <%= link_to "Add Bill", new_invoice_path,
     class: "btn btn-primary m-5" %>
-  <%= button_to "Show Pending Bills", pending_invoices_path,
+  <%= button_to "Show Pending Bills", dashboard_invoices_path , method: :get, params: { type: 'pending' },
+  class: "btn btn-primary m-5" %>
+
+  <%= button_to "Show Collected Bills", dashboard_invoices_path, params: { type: 'collected' },
     class: "btn btn-primary m-5", method: :get %>
-  <%= button_to "Show Collected Bills", collected_invoices_path,
-    class: "btn btn-primary m-5", method: :get %>
-  <%= link_to "Show all Bills", root_path, class: "btn btn-primary m-5" %>
+  <%= link_to "Show all Bills", dashboard_path, class: "btn btn-primary m-5" %>
 </div>
 
 <div class="table-wrapper-scroll-y my-custom-scrollbar m-2">
@@ -26,14 +27,14 @@
     <tbody>
       <% invoices.each do |invoice| %>
         <tr>
-          <td><%= invoice['reference_id'] %></td>
-          <td><%= invoice['invoice_date'] %></td>
-          <td><%= invoice['customer_name'] %></td>
-          <td><%= invoice['brand_manager'] %></td>
-          <td><%= invoice['narration'] %></td>
-          <td><%= invoice['total_amount'] %></td>
-          <td><%= invoice['collected_amount'] %></td>
-          <td><%= (invoice['total_amount'].to_i - invoice['collected_amount'].to_i) %></td>
+          <td><%= link_to invoice.reference_id, invoice %></td>
+          <td><%= invoice.invoice_date %></td>
+          <td><%= invoice.customer_name %></td>
+          <td><%= invoice.brand_manager %></td>
+          <td><%= invoice.narration %></td>
+          <td><%= invoice.total_amount %></td>
+          <td><%= invoice.collections.pluck(:collected_amount).reduce(:+).to_i %></td>
+          <td><%= (invoice.total_amount.to_i - invoice.collections.pluck(:collected_amount).reduce(:+).to_i ) %></td>
           <td class="text-center">
               <%= link_to "Add", new_collection_path, class: "btn btn-primary" %>
           </td>

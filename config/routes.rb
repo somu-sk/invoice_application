@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
 
-  root to: 'invoices#index', as: :root
+  root to: 'invoices#dashboard', as: :dashboard
 
   resources :invoices do
     collection do
-      get :'collected_bills', as: :collected
-      get :'pending_bills', as: :pending
-      get :'dashboard', as: :dashboard
+      get :dashboard
     end
   end
 

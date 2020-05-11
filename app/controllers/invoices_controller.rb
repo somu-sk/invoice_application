@@ -1,9 +1,7 @@
 class InvoicesController < ApplicationController
-  def index
-    @invoices = Invoice.dashboard_data
-    @collected_bills = Invoice.collected_bills
-    @pending_bills = Invoice.pending_bills
-    @show_table = @invoices
+  def dashboard
+    # @show_table = params['type'].present? ? Invoice.filtered_bills(params['type']) : Invoice.dashboard_data
+    @show_table = params['type'].present? ? Invoice.filtered_bills(params['type']): Invoice.includes(:collections).order(invoice_date: :desc)
   end
 
   def show
@@ -14,10 +12,6 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.new()
   end
 
-  def dashboard
-   render :template => 'invoices/index'
-  end
-
   def create
     invoice = params[:invoice]
     if invoice[:reference_id].present? && invoice[:total_amount].present? && invoice[:brand_manager].present?
@@ -25,23 +19,4 @@ class InvoicesController < ApplicationController
     end
     redirect_to '/'
   end
-
-  def collected_bills
-    # @invoices = Invoice.includes(:collections).select{ |invoice| invoice.total_amount == (invoice.collections.pluck(:collected_amount).reduce(:+).to_i)}
-    @invoices = Invoice.collected_bills
-  end
-
-  def pending_bills
-    @show_table = pending_table
-  end
-
-
-  private
-    def pending_table
-      @pending_table ||= Invoice.pending_bills
-    end
-
-    def collected_table
-      @collected_table ||= Invoice.collected_bills
-    end
 end
