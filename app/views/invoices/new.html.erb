@@ -1,0 +1,43 @@
+<div class="card m-5">
+  <div class="card-header text-center font-weight-bold">
+    New Invoice
+  </div>
+
+  <%= form_with(model: @invoice, local: true, html: {multipart: true}) do |form| %>
+    <div class="custom-form">
+      <div class="field row mt-5 row">
+        <%= form.label 'Reference ID:', class: 'col-2 text-right' %>
+        <%= form.text_field :reference_id, class: "input col-6" %>
+      </div>
+
+      <div class="field row mt-4">
+        <%= form.label 'Amount:', class: 'col-2 text-right' %>
+        <%= form.text_field :total_amount, class: "input col-6" %>
+      </div>
+
+      <div class="field row mt-4">
+        <%= form.label 'Date:', class: 'col-2 text-right' %>
+        <%= form.text_field :invoice_date, class: "input col-6" %>
+      </div>
+
+      <div class="field row mt-4">
+        <%= form.label 'Narration:', class: 'col-2 text-right' %>
+        <%= form.text_field :narration, class: "input col-6" %>
+      </div>
+
+      <div class="field row mt-4">
+        <%= form.label 'Brand Manager:', class: 'col-2 text-right' %>
+        <%= form.text_field :brand_manager, class: "input col-6" %>
+      </div>
+
+      <div class="field row mt-4 justify-center">
+        <%= form.label 'Customer Names:', class: 'col-2 text-right' %>
+        <%= form.text_field :customer_names, class: "input col-6" %>
+      </div>
+
+      <div class="actions row mt-4">
+        <%= form.submit class: "red-btn btn btn-primary hvr-radial-in mx-auto mb-3" %>
+      </div>
+    </div>
+  <% end %>
+</div>

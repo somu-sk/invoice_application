@@ -1,0 +1,57 @@
+<div class="d-flex justify-content-center">
+  <%= link_to "Add Bill", new_invoice_path,
+    class: "btn btn-primary m-5" %>
+  <%= button_to "Show Pending Bills", pending_invoices_path,
+    class: "btn btn-primary m-5", method: :get %>
+  <%= button_to "Show Collected Bills", collected_invoices_path,
+    class: "btn btn-primary m-5", method: :get %>
+  <%= link_to "Show all Bills", root_path, class: "btn btn-primary m-5" %>
+</div>
+
+<div class="table-wrapper-scroll-y my-custom-scrollbar m-2">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th scope="col" class="sticky-header">Reference</th>
+        <th scope="col" class="sticky-header">Invoice Date</th>
+        <th scope="col" class="sticky-header">Customer</th>
+        <th scope="col" class="sticky-header">Brand Manager</th>
+        <th scope="col" class="sticky-header">Narration</th>
+        <th scope="col" class="sticky-header">Amount</th>
+        <th scope="col" class="sticky-header">Collected Amount</th>
+        <th scope="col" class="sticky-header">Balance Due</th>
+        <th scope="col" class="sticky-header">Add Collection</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% invoices.each do |invoice| %>
+        <tr>
+          <td><%= invoice['reference_id'] %></td>
+          <td><%= invoice['invoice_date'] %></td>
+          <td><%= invoice['customer_name'] %></td>
+          <td><%= invoice['brand_manager'] %></td>
+          <td><%= invoice['narration'] %></td>
+          <td><%= invoice['total_amount'] %></td>
+          <td><%= invoice['collected_amount'] %></td>
+          <td><%= (invoice['total_amount'].to_i - invoice['collected_amount'].to_i) %></td>
+          <td class="text-center">
+              <%= link_to "Add", new_collection_path, class: "btn btn-primary" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .my-custom-scrollbar {
+    position: relative;
+    min-height: 80vh;
+    max-height: 100vh;
+    overflow: auto;
+  }
+  .sticky-header {
+    position: sticky;
+    top: 5;
+  }
+</style>

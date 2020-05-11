@@ -1,0 +1,28 @@
+<div class="card text-center m-5">
+  <div class="card-header font-weight-bold">
+    New Collection
+  </div>
+
+  <%= form_with(model: @collection, local: true, html: {multipart: true}) do |form| %>
+    <div class="custom-form">
+      <div class="field row mt-5 row">
+        <%= form.label 'Reference ID:', class: 'col-3 text-right' %>
+        <%= form.text_field :reference_id, class: "input col-6" %>
+      </div>
+
+      <div class="field row mt-4">
+        <%= form.label 'Amount:', class: 'col-3 text-right' %>
+        <%= form.text_field :collected_amount, class: "input col-6" %>
+      </div>
+
+      <div class="field row mt-4">
+        <%= form.label 'Date:', class: 'col-3 text-right' %>
+        <%= form.text_field :collection_date, class: "input col-6" %>
+      </div>
+
+      <div class="actions row mt-4">
+        <%= form.submit class: "red-btn btn btn-primary hvr-radial-in mx-auto mb-3" %>
+      </div>
+    </div>
+  <% end %>
+</div>
