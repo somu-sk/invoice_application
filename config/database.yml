@@ -12,6 +12,8 @@ test:
   <<: *default
   database: invoice_application_test
 
-# production:
-#   <<: *default
-#   database: db/production.sqlite3
+production:
+  <<: *default
+  database: d2902enaeak4op
+  username: tlqkgqxejzjvfn
+  password: ff63481fda310ecc390d60ebe80469c4bad8bd6864b5a12d0419ff6c61c74931
